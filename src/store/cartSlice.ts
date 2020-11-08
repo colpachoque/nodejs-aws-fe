@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
     addToCart: (state, action: PayloadAction<Product>) => {
       const {items} = state;
       const {payload: product} = action;
-      const existingItem = items.find(i => i.product.id === product.id);
+      const existingItem = items.find(i => i.product.product_id === product.product_id);
       if (existingItem) {
         existingItem.count++;
         return;
@@ -30,13 +30,13 @@ export const cartSlice = createSlice({
     removeFromCart: (state, action: PayloadAction<Product>) => {
       let {items} = state;
       const {payload: product} = action;
-      const existingItem = items.find(i => i.product.id === product.id);
+      const existingItem = items.find(i => i.product.product_id === product.product_id);
       if (!existingItem) return;
       if (existingItem.count > 1) {
         existingItem.count--;
         return;
       }
-      state.items = items.filter(i => i.product.id !== product.id);
+      state.items = items.filter(i => i.product.product_id !== product.product_id);
     },
     clearCart: (state) => {
       state.items = [];
